@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, addURLToApi } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
@@ -22,10 +22,15 @@ export class App extends Component {
           this.setState({error: "We ran into some problems grabbing the data, please try again!"})
         })
 
-
   }
+
   componentDidMount() {
     this.getDataFromAPI()
+  }
+
+  addNewUrl = ({longUrl, title}) => {
+    addURLToApi(longUrl, title)
+        .then((url) => this.setState({urls: [...this.state.urls, url]}))
   }
 
   render() {
@@ -33,9 +38,10 @@ export class App extends Component {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm />
+          <UrlForm
+          addNewUrl={this.addNewUrl}
+            />
         </header>
-
         <UrlContainer urls={this.state.urls}/>
       </main>
     );
