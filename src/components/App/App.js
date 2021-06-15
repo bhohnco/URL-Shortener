@@ -12,7 +12,20 @@ export class App extends Component {
     }
   }
 
+  getDataFromAPI = () => {
+    getUrls()
+        .then((urls) => {
+          this.setState({urls: urls.urls})
+        })
+        .catch(error => {
+          console.log("Data request has failed please check your code", error)
+          this.setState({error: "We ran into some problems grabbing the data, please try again!"})
+        })
+
+
+  }
   componentDidMount() {
+    this.getDataFromAPI()
   }
 
   render() {
