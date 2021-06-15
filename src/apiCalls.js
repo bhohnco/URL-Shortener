@@ -14,10 +14,8 @@ export const addURLToApi = (longUrl, title) => {
   })
       .then(response => {
         if(response.ok) {
-          console.log(response.status)
           return response
         } else {
-          console.log(response.status)
           throw new Error('Were having issues right now, please try again!')
         }
       })
