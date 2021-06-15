@@ -15,11 +15,14 @@ class UrlForm extends Component {
 
   handleSubmit = (e, props) => {
     e.preventDefault();
-    this.props.addNewUrl({
-      longUrl: this.state.urlToShorten,
-      title: this.state.title
-    })
-    this.clearInputs();
+    if (this.state.title && this.state.urlToShorten) {
+      const newUrlAdd = {
+        longUrl: this.state.urlToShorten,
+        title: this.state.title
+      }
+      this.props.addNewUrl(newUrlAdd)
+      this.clearInputs();
+    }
   }
 
   clearInputs = () => {
